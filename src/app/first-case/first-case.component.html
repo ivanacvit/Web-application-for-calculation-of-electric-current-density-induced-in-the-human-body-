@@ -1,0 +1,61 @@
+<div class="container">
+    <h1>Zatvaranje strujnog kruga</h1>
+    <h1>ruka - trup - ruka</h1>
+
+    <div class="row row-img">
+        <div class="col-6 col-md-2" *ngFor="let humanBody of humanBody; index as i">
+            <a (click)="clickOnImage(humanBody.id)"><img [src]='humanBody.image' class="images"
+                    [ngClass]="{'image-selected': (selectedHumanBodyId - 1) === i}">
+                <p class="description">{{humanBody.description}}</p>
+            </a>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row row-input">
+        <div class="col-sm-8 col-md-4">
+            
+            <mat-form-field class="input">
+                <input matInput #frequency placeholder="Frekvencija [Hz]" type="number">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field class="dropdown">
+                <mat-label>Napon [V]</mat-label>
+                <mat-select (selectionChange)="onSelectionChange($event.value)">
+                    <mat-option *ngFor="let voltage of voltages; index as i" [value]="i">{{voltage.U }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <br> <br>
+
+            <div class="button">
+                <button mat-raised-button
+                    (click)='calculate(frequency.value); showResult(frequency.value); showChart(frequency.value)'>Izračunaj</button>
+            </div>
+
+            <div class="result" *ngIf='result'>
+                <br>
+                <p>Struja: {{I | number : '.4'}} [A]</p>
+                <p>Gustoća struje kroz ruku: {{armEnergyDensity | number : '.4'}} [A/m&#178;]</p>
+                <p>Gustoća struje kroz trup: {{bodyEnergyDensity | number : '.4'}} [A/m&#178;]</p>
+            </div>
+
+            <br>
+
+            <div class="message" *ngIf='message'>
+                <p>Niste unijeli frekvenciju!</p>
+            </div>
+        </div>
+
+        <div class="col-sm-8 col-md-6">
+            <div class="chart" *ngIf='chart'>
+                <app-first-chart #chart [frequency]="frequency.value" [u]="u" [r1]="r1" [c1]="c1" [r2]="r2" [c2]="c2"
+                    [armLength]="armLength" [armSurface]="armSurface" [upperBodyLength]="upperBodyLength"
+                    [upperBodySurface]="upperBodySurface">
+                </app-first-chart>
+            </div>
+        </div>
+    </div>

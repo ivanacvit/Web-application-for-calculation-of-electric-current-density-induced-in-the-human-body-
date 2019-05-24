@@ -1,0 +1,23 @@
+.container-fluid {
+    padding:0px;
+    width: 100%;
+    
+}
+
+.nav-pills a{
+    color:white;
+}
+
+a:hover{
+    background-color: grey;
+}
+
+.nav > li:not(:last-child) {
+    border-right: 1px solid grey;
+    box-sizing: border-box;
+}
+
+
+
+
+

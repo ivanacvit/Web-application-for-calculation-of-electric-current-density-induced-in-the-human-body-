@@ -1,0 +1,71 @@
+.container{
+  padding:0px;
+  padding-bottom: 20px;
+  margin:auto;
+}
+
+h1{
+  color:black;
+  margin:auto;
+  text-align:center;
+}
+
+.row-img{
+  width:600px;
+  padding-top:30px;
+}
+
+.images{
+  width:  80px;
+  height: 160px;
+}
+
+.image-selected{
+  border: 3px inset white;
+  border-radius: 5px;
+}
+
+.input, .dropdown, button, .result, .description, .napon{
+  font-size: 15px;
+}
+
+select, button {
+  display: block;
+  background-color:grey;
+  font-family:Arial, Helvetica, sans-serif;
+  color:white;
+}
+
+input{
+  background-color:lightgrey;
+}
+
+.message{
+  font-weight: bold;
+  font-size: 20px;
+  color: darkgrey;
+
+}
+
+@media screen and (max-width:800px) {
+  .row{
+    width:100%;
+    margin: auto;
+  }
+
+  .images{
+    padding-bottom: 2px;
+  }
+
+  .input, .dropdown, button, .result, .description, .napon{
+    font-size: 13px;
+  }
+
+  .container{
+    margin: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 50px;
+    
+  }
+}
