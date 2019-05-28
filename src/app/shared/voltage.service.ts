@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Voltage } from "./voltage";
+import { Injectable } from '@angular/core';
+import { Voltage } from './voltage';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class VoltageService {
   voltages: Voltage[] = [];

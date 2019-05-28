@@ -1,32 +1,29 @@
 .container {
-    padding: 0px;
+  padding: 0px;
+  margin: auto;
+}
+
+.row {
+  margin: auto;
+  padding-top: 200px;
+}
+
+p {
+  font-size: 18px;
+}
+
+img {
+  width: 400px;
+  height: 400px;
+  margin-left: 20px;
+}
+
+@media screen and (max-width: 800px) {
+  .row {
     margin: auto;
+    padding-top: 20px;
+  }
+  img {
+    margin: auto;
+  }
 }
-
-.row{
-    margin:auto;
-    padding-top:200px;
-}
-
-p{
-    font-size: 18px;
-}
-
-
-img{
-    width: 400px;
-    height: 400px;
-    margin-left: 20px;
-}
-
-@media screen and (max-width:800px) {
-    .row{
-        margin:auto;
-        padding-top:20px;
-    }
-    img{
-        margin:auto;
-    }
-}
-
-

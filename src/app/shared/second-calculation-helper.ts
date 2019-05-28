@@ -1,4 +1,4 @@
-export function calculate(
+export function calculationHelper(
   frequency: number,
   u: number,
   r1: number,
@@ -18,17 +18,17 @@ export function calculate(
   const resistance = armResistance + bodyResistance + 0.5 * legResistance;
 
   const Zc1 = -1 / (2 * Math.PI * frequency * c1);
-  const Z1_real = (r1 * Zc1 * Zc1) / (r1 * r1 + Zc1 * Zc1);
-  const Z1_imaginary = (r1 * r1 * Zc1) / (r1 * r1 + Zc1 * Zc1);
+  const Z1Real = (r1 * Zc1 * Zc1) / (r1 * r1 + Zc1 * Zc1);
+  const Z1Imaginary = (r1 * r1 * Zc1) / (r1 * r1 + Zc1 * Zc1);
 
   const Zc2 = -1 / (2 * Math.PI * frequency * c2);
-  const Z2_real = (r2 * Zc2 * Zc2) / (r2 * r2 + Zc2 * Zc2);
-  const Z2_imaginary = (r2 * r2 * Zc2) / (r2 * r2 + Zc2 * Zc2);
+  const Z2Real = (r2 * Zc2 * Zc2) / (r2 * r2 + Zc2 * Zc2);
+  const Z2Imaginary = (r2 * r2 * Zc2) / (r2 * r2 + Zc2 * Zc2);
 
-  const Z_real = 2 * Z1_real + 2 * Z2_real + resistance;
-  const Z_imaginary = 2 * Z1_imaginary + 2 * Z2_imaginary;
+  const ZReal = 2 * Z1Real + 2 * Z2Real + resistance;
+  const ZImaginary = 2 * Z1Imaginary + 2 * Z2Imaginary;
 
-  const Z = Math.sqrt(Z_real * Z_real + Z_imaginary * Z_imaginary);
+  const Z = Math.sqrt(ZReal * ZReal + ZImaginary * ZImaginary);
 
   const I = u / Z;
   const armEnergyDensity = I / armSurface;
@@ -36,7 +36,7 @@ export function calculate(
   const legEnergyDensity = I / legSurface;
 
   console.log(
-    "I, izracunaj gustocaStrujeKrozRuku, gustocaStrujeKrozTrup, gustocaStrujeKrozNogu:",
+    'I, izracunaj gustocaStrujeKrozRuku, gustocaStrujeKrozTrup, gustocaStrujeKrozNogu:',
     I,
     armEnergyDensity,
     bodyEnergyDensity,

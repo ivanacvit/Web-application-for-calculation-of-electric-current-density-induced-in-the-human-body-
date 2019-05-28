@@ -1,10 +1,10 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { calculate } from "../shared/second-calculation-helper";
+import { Component, Input, OnInit } from '@angular/core';
+import { calculationHelper } from '../shared/second-calculation-helper';
 
 @Component({
-  selector: "app-second-chart",
-  templateUrl: "./second-chart.component.html",
-  styleUrls: ["./second-chart.component.css"]
+  selector: 'app-second-chart',
+  templateUrl: './second-chart.component.html',
+  styleUrls: ['./second-chart.component.css']
 })
 export class SecondChartComponent implements OnInit {
   @Input() frequency: string;
@@ -23,11 +23,11 @@ export class SecondChartComponent implements OnInit {
   dataAdapter: any;
 
   pushData() {
-    let data = [];
+    const data = [];
 
     for (let i = 0; i <= 10; i++) {
       const freq = i === 0 ? 1 : i * 200;
-      const calculation = calculate(
+      const calculation = calculationHelper(
         freq,
         this.u,
         this.r1,
@@ -62,7 +62,7 @@ export class SecondChartComponent implements OnInit {
 
   getWidth(): any {
     if (document.body.offsetWidth < 850) {
-      return "90%";
+      return '90%';
     }
     return 600;
   }
@@ -71,12 +71,12 @@ export class SecondChartComponent implements OnInit {
     if (document.body.offsetWidth < 850) {
       return false;
     }
-    return "Ovisnost gustoće struje o frekvenciji";
+    return 'Ovisnost gustoće struje o frekvenciji';
   }
 
   xAxis: any = {
-    dataField: "Frequency",
-    displayText: "Frekvencija",
+    dataField: 'Frequency',
+    displayText: 'Frekvencija',
     minValue: 0,
     maxValue: 2000,
     unitInterval: 200,
@@ -91,16 +91,16 @@ export class SecondChartComponent implements OnInit {
   };
   seriesGroups: any[] = [
     {
-      type: "spline",
+      type: 'spline',
       valueAxis: {
         padding: { left: 10 },
-        title: { text: "Gustoća struje [A/m²]<br>" },
+        title: { text: 'Gustoća struje [A/m²]<br>' },
         gridLines: { visible: false }
       },
       series: [
-        { dataField: "Arm", displayText: "Gustoća struje kroz ruku [A/m²]" },
-        { dataField: "Body", displayText: "Gustoća struje kroz trup [A/m²]" },
-        { dataField: "Leg", displayText: "Gustoća struje kroz nogu [A/m²]" }
+        { dataField: 'Arm', displayText: 'Gustoća struje kroz ruku [A/m²]' },
+        { dataField: 'Body', displayText: 'Gustoća struje kroz trup [A/m²]' },
+        { dataField: 'Leg', displayText: 'Gustoća struje kroz nogu [A/m²]' }
       ]
     }
   ];

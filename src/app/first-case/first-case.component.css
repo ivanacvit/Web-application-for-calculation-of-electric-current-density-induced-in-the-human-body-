@@ -1,71 +1,78 @@
-.container{
-  padding:0px;
+.container {
+  padding: 0px;
   padding-bottom: 20px;
-  margin:auto;
+  margin: auto;
 }
 
-h1{
-  color:black;
-  margin:auto;
-  text-align:center;
+h1 {
+  color: black;
+  margin: auto;
+  text-align: center;
 }
 
-.row-img{
-  width:600px;
-  padding-top:30px;
+.row-img {
+  width: 600px;
+  padding-top: 30px;
 }
 
-.images{
-  width:  80px;
+.images {
+  width: 80px;
   height: 160px;
 }
 
-.image-selected{
+.image-selected {
   border: 3px inset white;
   border-radius: 5px;
 }
 
-.input, .dropdown, button, .result, .description, .napon{
+.input,
+.dropdown,
+button,
+.description,
+.napon {
   font-size: 15px;
 }
 
-select, button {
+select,
+button {
   display: block;
-  background-color:grey;
-  font-family:Arial, Helvetica, sans-serif;
-  color:white;
+  background-color: grey;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
 }
 
-input{
-  background-color:lightgrey;
+input {
+  background-color: lightgrey;
 }
 
-.message{
+.message {
   font-weight: bold;
   font-size: 20px;
   color: darkgrey;
-
 }
 
-@media screen and (max-width:800px) {
-  .row{
-    width:100%;
+@media screen and (max-width: 800px) {
+  .row {
+    width: 100%;
     margin: auto;
   }
 
-  .images{
+  .images {
     padding-bottom: 2px;
   }
 
-  .input, .dropdown, button, .result, .description, .napon{
+  .input,
+  .dropdown,
+  button,
+  .description,
+  .napon {
     font-size: 13px;
   }
 
-  .container{
+  .container {
     margin: auto;
     padding-right: 15px;
     padding-left: 15px;
     padding-bottom: 50px;
-    
   }
 }

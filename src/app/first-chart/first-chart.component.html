@@ -1,4 +1,31 @@
-<jqxChart *ngIf="dataAdapter" #myChart [width]="getWidth()" [height]="500" [title]="getTitle()" [description]="false"
-    [showLegend]="true" [enableAnimations]="true" [padding]="padding" [titlePadding]="titlePadding"
-    [source]="dataAdapter" [xAxis]="xAxis" [seriesGroups]="seriesGroups" [colorScheme]="'scheme01'">
+<div class="result">
+  <p>Struja: {{ I | number: ".4" }} [A]</p>
+  <p>
+    Gustoća struje kroz ruku:
+    {{ armEnergyDensity | number: ".4" }} [A/m&#178;]
+  </p>
+  <p>
+    Gustoća struje kroz trup:
+    {{ bodyEnergyDensity | number: ".4" }} [A/m&#178;]
+  </p>
+</div>
+
+<br />
+
+<jqxChart
+  *ngIf="dataAdapter"
+  #myChart
+  [width]="getWidth()"
+  [height]="500"
+  [title]="getTitle()"
+  [description]="false"
+  [showLegend]="true"
+  [enableAnimations]="true"
+  [padding]="padding"
+  [titlePadding]="titlePadding"
+  [source]="dataAdapter"
+  [xAxis]="xAxis"
+  [seriesGroups]="seriesGroups"
+  [colorScheme]="'scheme01'"
+>
 </jqxChart>
