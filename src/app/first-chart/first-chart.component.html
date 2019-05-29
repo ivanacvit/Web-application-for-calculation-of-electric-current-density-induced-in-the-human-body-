@@ -1,3 +1,4 @@
+<br />
 <div class="result">
   <p>Struja: {{ I | number: ".4" }} [A]</p>
   <p>
@@ -12,20 +13,7 @@
 
 <br />
 
-<jqxChart
-  *ngIf="dataAdapter"
-  #myChart
-  [width]="getWidth()"
-  [height]="500"
-  [title]="getTitle()"
-  [description]="false"
-  [showLegend]="true"
-  [enableAnimations]="true"
-  [padding]="padding"
-  [titlePadding]="titlePadding"
-  [source]="dataAdapter"
-  [xAxis]="xAxis"
-  [seriesGroups]="seriesGroups"
-  [colorScheme]="'scheme01'"
->
+<jqxChart *ngIf="dataAdapter" #myChart [width]="getWidth()" [height]="500" [title]="getTitle()" [description]="false"
+  [showLegend]="true" [enableAnimations]="true" [padding]="padding" [titlePadding]="titlePadding" [source]="dataAdapter"
+  [xAxis]="xAxis" [seriesGroups]="seriesGroups" [colorScheme]="'scheme01'">
 </jqxChart>

@@ -1,68 +1,92 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { calculationHelper } from '../shared/second-calculation-helper';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { calculationHelper } from '../second-case-shared/calculation-helper';
+import {
+  CalculationData,
+  CalculationResult
+} from '../second-case-shared/calculation-types';
+import { SelectedElectricityProps } from '../second-case-shared/selected-electricity-props';
+import isEqual from 'lodash-es/isEqual';
+import sortBy from 'lodash-es/sortBy';
 
 @Component({
   selector: 'app-second-chart',
   templateUrl: './second-chart.component.html',
   styleUrls: ['./second-chart.component.css']
 })
-export class SecondChartComponent implements OnInit {
-  @Input() frequency: string;
-  @Input() u: number;
-  @Input() r1: number;
-  @Input() c1: number;
-  @Input() r2: number;
-  @Input() c2: number;
-  @Input() armLength: number;
-  @Input() armSurface: number;
-  @Input() bodyLength: number;
-  @Input() bodySurface: number;
-  @Input() legLength: number;
-  @Input() legSurface: number;
+export class SecondChartComponent implements OnChanges {
+  @Input() selectedElectricityProps: SelectedElectricityProps;
 
   dataAdapter: any;
+  I: number;
+  armEnergyDensity: number;
+  bodyEnergyDensity: number;
+  legEnergyDensity: number;
 
-  pushData() {
-    const data = [];
+  ngOnChanges(changes: SimpleChanges) {
+    if (!isEqual(
+      changes.selectedElectricityProps.currentValue,
+      changes.selectedElectricityProps.previousValue
+    )
+    ) {
+      this.pushData(this.selectedElectricityProps);
+    }
+  }
 
+  pushData(data: SelectedElectricityProps) {
+    const newDataAdapter = [];
+    let userFreq = data.frequency;
+    const calculationHelperData: CalculationData = {
+      u: data.u,
+      r1: data.r1,
+      c1: data.c1,
+      r2: data.r2,
+      c2: data.c2,
+      armLength: data.armLength,
+      armSurface: data.armSurface,
+      bodyLength: data.bodyLength,
+      bodySurface: data.bodySurface,
+      legLength: data.legLength,
+      legSurface: data.legSurface,
+    };
+    const userCalculation = calculationHelper(userFreq, calculationHelperData);
+    newDataAdapter.push({
+      Frequency: userFreq,
+      Arm: userCalculation.armEnergyDensity,
+      Body: userCalculation.bodyEnergyDensity,
+      Leg: userCalculation.legEnergyDensity
+    }
+    );
+
+    this.I = userCalculation.I;
+    this.armEnergyDensity = userCalculation.armEnergyDensity;
+    this.bodyEnergyDensity = userCalculation.bodyEnergyDensity;
+    this.legEnergyDensity = userCalculation.legEnergyDensity;
+
+    let freq: number;
+    let simulatedCalculation: CalculationResult;
     for (let i = 0; i <= 10; i++) {
-      const freq = i === 0 ? 1 : i * 200;
-      const calculation = calculationHelper(
-        freq,
-        this.u,
-        this.r1,
-        this.c1,
-        this.r2,
-        this.c2,
-        this.armLength,
-        this.armSurface,
-        this.bodyLength,
-        this.bodySurface,
-        this.legLength,
-        this.legSurface
-      );
+      freq = i === 0 ? 1 : i * 200;
+      if (freq !== userFreq) {
+        simulatedCalculation = calculationHelper(freq, calculationHelperData);
 
-      data.push({
-        Frequency: freq,
-        Arm: calculation.armEnergyDensity,
-        Body: calculation.bodyEnergyDensity,
-        Leg: calculation.legEnergyDensity
-      });
+        newDataAdapter.push({
+          Frequency: freq,
+          Arm: simulatedCalculation.armEnergyDensity,
+          Body: simulatedCalculation.bodyEnergyDensity,
+          Leg: simulatedCalculation.legEnergyDensity
+        });
+      }
     }
 
-    this.dataAdapter = data;
+    this.dataAdapter = sortBy(newDataAdapter, ['Frequency']);
   }
-
-  ngOnInit() {
-    this.pushData();
-  }
-
   padding: any = { left: 5, top: 5, right: 25, bottom: 5 };
+
   titlePadding: any = { left: 90, top: 0, right: 0, bottom: 30 };
 
   getWidth(): any {
     if (document.body.offsetWidth < 850) {
-      return '90%';
+      return '100%';
     }
     return 600;
   }

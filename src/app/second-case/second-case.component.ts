@@ -1,26 +1,22 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { VoltageService } from '../shared/voltage.service';
 import { Voltage } from '../shared/voltage';
 import { HumanBodyService } from '../shared/human-body.service';
 import { HumanBody } from '../shared/human-body';
-import { calculationHelper } from '../shared/second-calculation-helper';
-import { SecondChartComponent } from '../second-chart/second-chart.component';
+import { SelectedElectricityProps } from '../second-case-shared/selected-electricity-props';
 
 @Component({
   templateUrl: './second-case.component.html',
   styleUrls: ['./second-case.component.css']
 })
 export class SecondCaseComponent {
-  @ViewChild('chart') chartRef: SecondChartComponent;
-
   I: number;
   armEnergyDensity: number;
   bodyEnergyDensity: number;
   legEnergyDensity: number;
   frequency: number;
-  result = false;
   chart = false;
-  message = false;
+  enter = false;
 
   voltages: Voltage[];
   selectedVoltageIndex: number;
@@ -38,7 +34,7 @@ export class SecondCaseComponent {
   bodySurface: number;
   legLength: number;
   legSurface: number;
-  dataReady = false;
+  selectedElectricityProps: SelectedElectricityProps;
 
   constructor(
     private voltagesService: VoltageService,
@@ -73,47 +69,38 @@ export class SecondCaseComponent {
     this.bodySurface = selectedImage.bodySurface;
     this.legLength = selectedImage.legLength;
     this.legSurface = selectedImage.legSurface;
-    this.dataReady = true;
 
-    const calculation = calculationHelper(
-      userFrequency,
-      this.u,
-      this.r1,
-      this.c1,
-      this.r2,
-      this.c2,
-      this.armLength,
-      this.armSurface,
-      this.bodyLength,
-      this.bodySurface,
-      this.legLength,
-      this.legSurface
-    );
-    this.I = calculation.I;
-    this.armEnergyDensity = calculation.armEnergyDensity;
-    this.bodyEnergyDensity = calculation.bodyEnergyDensity;
-    this.legEnergyDensity = calculation.legEnergyDensity;
-    if (!this.chartRef) {
-      return;
+    this.selectedElectricityProps = {
+      frequency: Number(frequency),
+      u: this.u,
+      r1: this.r1,
+      c1: this.c1,
+      r2: this.r2,
+      c2: this.c2,
+      armLength: this.armLength,
+      armSurface: this.armSurface,
+      bodyLength: this.bodyLength,
+      bodySurface: this.bodySurface,
+      legLength: this.legLength,
+      legSurface: this.legSurface
+    };
+  }
+
+
+  showChart(frequency) {
+    if (frequency) {
+      this.chart = true;
+    } else {
+      this.chart = false;
     }
-    this.chartRef.pushData();
   }
 
-  showResult(frequency) {
-  if (frequency) {
-    this.result = true;
-    this.message = false;
-  } else {
-    this.result = false;
-    this.message = true;
+  enterFrequency(frequency) {
+    if (frequency) {
+      this.enter = false;
+    } else {
+      this.enter = true;
+    }
   }
-}
 
-showChart(frequency) {
-  if (frequency) {
-    this.chart = true;
-  } else {
-    this.chart = false;
-  }
-  }
 }

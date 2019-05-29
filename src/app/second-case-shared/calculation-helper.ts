@@ -1,15 +1,16 @@
-import { FirstCalculationData, FirstCalculationResult } from './first-calculation-types';
+import { CalculationData, CalculationResult } from './calculation-types';
 
-export function calculationHelper(freq: number, data: FirstCalculationData) : FirstCalculationResult {
+export function calculationHelper(frequency: number, data: CalculationData):CalculationResult{
   const armResistance = data.armLength / (0.8 * data.armSurface);
-  const bodyResistance = data.upperBodyLength / (0.52 * data.upperBodySurface);
-  const resistance = 2 * armResistance + bodyResistance;
+  const bodyResistance = data.bodyLength / (0.52 * data.bodySurface);
+  const legResistance = data.legLength / (0.8 * data.legSurface);
+  const resistance = armResistance + bodyResistance + 0.5 * legResistance;
 
-  const Zc1 = -1 / (2 * Math.PI * freq * data.c1);
+  const Zc1 = -1 / (2 * Math.PI * frequency * data.c1);
   const Z1Real = (data.r1 * Zc1 * Zc1) / (data.r1 * data.r1 + Zc1 * Zc1);
   const Z1Imaginary = (data.r1 * data.r1 * Zc1) / (data.r1 * data.r1 + Zc1 * Zc1);
 
-  const Zc2 = -1 / (2 * Math.PI * freq * data.c2);
+  const Zc2 = -1 / (2 * Math.PI * frequency * data.c2);
   const Z2Real = (data.r2 * Zc2 * Zc2) / (data.r2 * data.r2 + Zc2 * Zc2);
   const Z2Imaginary = (data.r2 * data.r2 * Zc2) / (data.r2 * data.r2 + Zc2 * Zc2);
 
@@ -20,12 +21,14 @@ export function calculationHelper(freq: number, data: FirstCalculationData) : Fi
 
   const I = data.u / Z;
   const armEnergyDensity = I / data.armSurface;
-  const bodyEnergyDensity = I / data.upperBodySurface;
+  const bodyEnergyDensity = I / data.bodySurface;
+  const legEnergyDensity = I / data.legSurface;
 
+ 
   return {
     I: I,
     armEnergyDensity,
-    bodyEnergyDensity
+    bodyEnergyDensity,
+    legEnergyDensity
   };
 }
-

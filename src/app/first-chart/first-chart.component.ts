@@ -1,17 +1,17 @@
-import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
-import { calculationHelper } from "../shared/first-calculation-helper";
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { calculationHelper } from '../first-case-shared/calculation-helper';
 import {
-  FirstCalculationData,
-  FirstCalculationResult
-} from "../shared/first-calculation-types";
-import { SelectedElectricityProps } from "../shared/selected-electricity-props";
+  CalculationData,
+  CalculationResult
+} from "../first-case-shared/calculation-types";
+import { SelectedElectricityProps } from '../first-case-shared/selected-electricity-props';
 import isEqual from "lodash-es/isEqual";
 import sortBy from "lodash-es/sortBy";
 
 @Component({
-  selector: "app-first-chart",
-  templateUrl: "./first-chart.component.html",
-  styleUrls: ["./first-chart.component.css"]
+  selector: 'app-first-chart',
+  templateUrl: './first-chart.component.html',
+  styleUrls: ['./first-chart.component.css']
 })
 export class FirstChartComponent implements OnChanges {
   @Input() selectedElectricityProps: SelectedElectricityProps;
@@ -22,11 +22,10 @@ export class FirstChartComponent implements OnChanges {
   bodyEnergyDensity: number;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (
-      !isEqual(
-        changes.selectedElectricityProps.currentValue,
-        changes.selectedElectricityProps.previousValue
-      )
+    if (!isEqual(
+      changes.selectedElectricityProps.currentValue,
+      changes.selectedElectricityProps.previousValue
+    )
     ) {
       this.pushData(this.selectedElectricityProps);
     }
@@ -34,8 +33,8 @@ export class FirstChartComponent implements OnChanges {
 
   pushData(data: SelectedElectricityProps) {
     const newDataAdapter = [];
-    let userFreq = data.freq;
-    const calculationHelperData: FirstCalculationData = {
+    let userFreq = data.frequency;
+    const calculationHelperData: CalculationData = {
       u: data.u,
       r1: data.r1,
       c1: data.c1,
@@ -44,7 +43,7 @@ export class FirstChartComponent implements OnChanges {
       armLength: data.armLength,
       armSurface: data.armSurface,
       upperBodyLength: data.upperBodyLength,
-      upperBodySurface: data.upperBodySurface
+      upperBodySurface: data.upperBodySurface,
     };
     const userCalculation = calculationHelper(userFreq, calculationHelperData);
     newDataAdapter.push({
@@ -58,7 +57,7 @@ export class FirstChartComponent implements OnChanges {
     this.bodyEnergyDensity = userCalculation.bodyEnergyDensity;
 
     let freq: number;
-    let simulatedCalculation: FirstCalculationResult;
+    let simulatedCalculation: CalculationResult;
     for (let i = 0; i <= 10; i++) {
       freq = i === 0 ? 1 : i * 200;
       if (freq !== userFreq) {
@@ -72,8 +71,8 @@ export class FirstChartComponent implements OnChanges {
       }
     }
 
-    this.dataAdapter = sortBy(newDataAdapter, ["Frequency"]);
-    console.log("ChartsComponent ubaciPodatke dataAdapter:", this.dataAdapter);
+    this.dataAdapter = sortBy(newDataAdapter, ['Frequency']);
+    console.log('ChartsComponent ubaciPodatke dataAdapter:', this.dataAdapter);
   }
 
   // graph properties
@@ -83,22 +82,23 @@ export class FirstChartComponent implements OnChanges {
 
   getWidth(): any {
     if (document.body.offsetWidth < 850) {
-      return "90%";
+      return '100%';
     }
 
     return 600;
   }
+  
 
   getTitle(): any {
     if (document.body.offsetWidth < 850) {
       return false;
     }
-    return "Ovisnost gustoće struje o frekvenciji";
+    return 'Ovisnost gustoće struje o frekvenciji';
   }
 
   xAxis: any = {
-    dataField: "Frequency",
-    displayText: "Frekvencija",
+    dataField: 'Frequency',
+    displayText: 'Frekvencija',
     minValue: 0,
     maxValue: 2000,
     unitInterval: 200,
@@ -115,15 +115,15 @@ export class FirstChartComponent implements OnChanges {
 
   seriesGroups: any[] = [
     {
-      type: "spline",
+      type: 'spline',
       valueAxis: {
         padding: { left: 10 },
-        title: { text: "Gustoća struje [A/m²] <br>" },
+        title: { text: 'Gustoća struje [A/m²] <br>' },
         gridLines: { visible: false }
       },
       series: [
-        { dataField: "Arm", displayText: "Gustoća struje kroz ruku [A/m²]" },
-        { dataField: "Body", displayText: "Gustoća struje kroz trup [A/m²]" }
+        { dataField: 'Arm', displayText: 'Gustoća struje kroz ruku [A/m²]' },
+        { dataField: 'Body', displayText: 'Gustoća struje kroz trup [A/m²]' }
       ]
     }
   ];

@@ -1,13 +1,13 @@
-import { Component } from "@angular/core";
-import { HumanBody } from "../shared/human-body";
-import { HumanBodyService } from "../shared/human-body.service";
-import { Voltage } from "../shared/voltage";
-import { VoltageService } from "../shared/voltage.service";
-import { SelectedElectricityProps } from "../shared/selected-electricity-props";
+import { Component } from '@angular/core';
+import { HumanBody } from '../shared/human-body';
+import { HumanBodyService } from '../shared/human-body.service';
+import { Voltage } from '../shared/voltage';
+import { VoltageService } from '../shared/voltage.service';
+import { SelectedElectricityProps } from '../first-case-shared/selected-electricity-props';
 
 @Component({
-  templateUrl: "./first-case.component.html",
-  styleUrls: ["./first-case.component.css"]
+  templateUrl: './first-case.component.html',
+  styleUrls: ['./first-case.component.css']
 })
 export class FirstCaseComponent {
   I: number;
@@ -15,6 +15,7 @@ export class FirstCaseComponent {
   bodyEnergyDensity: number;
   frequency: number;
   chart = false;
+  enter = false;
 
   voltages: Voltage[];
   selectedVoltageIndex: number;
@@ -64,7 +65,7 @@ export class FirstCaseComponent {
     this.upperBodySurface = selectedImage.upperBodySurface;
 
     this.selectedElectricityProps = {
-      freq: Number(frequency),
+      frequency: Number(frequency),
       u: this.u,
       r1: this.r1,
       c1: this.c1,
@@ -82,6 +83,14 @@ export class FirstCaseComponent {
       this.chart = true;
     } else {
       this.chart = false;
+    }
+  }
+
+  enterFrequency(frequency) {
+    if (frequency) {
+      this.enter = false;
+    } else {
+      this.enter = true;
     }
   }
 }

@@ -4,12 +4,8 @@
 
   <div class="row row-img">
     <div class="col-6 col-md-2" *ngFor="let humanBody of humanBody; index as i">
-      <a (click)="clickOnImage(humanBody.id)"
-        ><img
-          [src]="humanBody.image"
-          class="images"
-          [ngClass]="{ 'image-selected': selectedHumanBodyId - 1 === i }"
-        />
+      <a (click)="clickOnImage(humanBody.id)"><img [src]="humanBody.image" class="images"
+          [ngClass]="{ 'image-selected': selectedHumanBodyId - 1 === i }" />
         <p class="description">{{ humanBody.description }}</p>
       </a>
     </div>
@@ -20,46 +16,44 @@
   <div class="row row-input">
     <div class="col-sm-8 col-md-4">
       <mat-form-field class="input">
-        <input
-          matInput
-          #frequency
-          placeholder="Frekvencija [Hz]"
-          type="number"
-        />
+        <input matInput #frequency placeholder="Frekvencija [Hz]" type="number" />
       </mat-form-field>
+      <div class="enter" *ngIf="enter">
+        <div class="alert alert-danger">
+          Unesite <strong>frekvenciju</strong>
+        </div>
+      </div>
 
       <br />
 
       <mat-form-field class="dropdown">
         <mat-label>Napon [V]</mat-label>
         <mat-select (selectionChange)="onSelectionChange($event.value)">
-          <mat-option
-            *ngFor="let voltage of voltages; index as i"
-            [value]="i"
-            >{{ voltage.U }}</mat-option
-          >
+          <mat-option *ngFor="let voltage of voltages; index as i" [value]="i">{{ voltage.U }}</mat-option>
         </mat-select>
       </mat-form-field>
+      <div class="enterVolt" *ngIf="enterVolt">
+          <div class="alert alert-danger">
+              Unesite <strong>napon</strong>
+            </div>
+      </div>
 
       <br />
       <br />
 
       <div class="button">
-        <button
-          mat-raised-button
-          (click)="calculate(frequency.value); showChart(frequency.value)"
-        >
+        <button mat-raised-button
+          (click)="calculate(frequency.value); enterFrequency(frequency.value); showChart(frequency.value)">
           Izračunaj
         </button>
       </div>
     </div>
 
+    <br />
+
     <div class="col-sm-8 col-md-6">
       <div class="chart" *ngIf="chart">
-        <app-first-chart
-          #chart
-          [selectedElectricityProps]="selectedElectricityProps"
-        >
+        <app-first-chart #chart [selectedElectricityProps]="selectedElectricityProps">
         </app-first-chart>
       </div>
     </div>
