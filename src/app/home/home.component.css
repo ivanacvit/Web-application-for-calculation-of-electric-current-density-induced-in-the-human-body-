@@ -1,11 +1,13 @@
 .container {
-  padding: 0px;
+  padding: 50px;
   margin: auto;
+  padding-bottom: 150px;
 }
 
-.row {
+.row-container {
   margin: auto;
   padding-top: 200px;
+  padding-left: 100px;
 }
 
 p {
@@ -13,17 +15,28 @@ p {
 }
 
 img {
-  width: 400px;
-  height: 400px;
+  width: 250px;
+  height: 280px;
   margin-left: 20px;
 }
+footer:hover{
+  opacity: 0.3;
+}
+
+footer{
+  margin:0px;
+  padding:0px;
+}
+
 
 @media screen and (max-width: 800px) {
-  .row {
+  .row-container {
     margin: auto;
     padding-top: 20px;
+    padding-left: 10px;
   }
   img {
     margin: auto;
+    padding-left: 10px;
   }
 }

@@ -16,7 +16,6 @@ export class SecondCaseComponent {
   legEnergyDensity: number;
   frequency: number;
   chart = false;
-  enter = false;
 
   voltages: Voltage[];
   selectedVoltageIndex: number;
@@ -92,14 +91,6 @@ export class SecondCaseComponent {
       this.chart = true;
     } else {
       this.chart = false;
-    }
-  }
-
-  enterFrequency(frequency) {
-    if (frequency) {
-      this.enter = false;
-    } else {
-      this.enter = true;
     }
   }
 

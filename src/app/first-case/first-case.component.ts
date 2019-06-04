@@ -15,7 +15,6 @@ export class FirstCaseComponent {
   bodyEnergyDensity: number;
   frequency: number;
   chart = false;
-  enter = false;
 
   voltages: Voltage[];
   selectedVoltageIndex: number;
@@ -86,11 +85,5 @@ export class FirstCaseComponent {
     }
   }
 
-  enterFrequency(frequency) {
-    if (frequency) {
-      this.enter = false;
-    } else {
-      this.enter = true;
-    }
-  }
+  
 }

@@ -20,6 +20,7 @@ export class FirstChartComponent implements OnChanges {
   I: number;
   armEnergyDensity: number;
   bodyEnergyDensity: number;
+  test:number;
 
   ngOnChanges(changes: SimpleChanges) {
     if (!isEqual(
@@ -41,7 +42,7 @@ export class FirstChartComponent implements OnChanges {
       r2: data.r2,
       c2: data.c2,
       armLength: data.armLength,
-      armSurface: data.armSurface,
+     armSurface: data.armSurface,
       upperBodyLength: data.upperBodyLength,
       upperBodySurface: data.upperBodySurface,
     };
@@ -62,11 +63,10 @@ export class FirstChartComponent implements OnChanges {
       freq = i === 0 ? 1 : i * 200;
       if (freq !== userFreq) {
         simulatedCalculation = calculationHelper(freq, calculationHelperData);
-
         newDataAdapter.push({
           Frequency: freq,
           Arm: simulatedCalculation.armEnergyDensity,
-          Body: simulatedCalculation.bodyEnergyDensity
+          Body: simulatedCalculation.bodyEnergyDensity,
         });
       }
     }
@@ -123,7 +123,7 @@ export class FirstChartComponent implements OnChanges {
       },
       series: [
         { dataField: 'Arm', displayText: 'Gustoća struje kroz ruku [A/m²]' },
-        { dataField: 'Body', displayText: 'Gustoća struje kroz trup [A/m²]' }
+        { dataField: 'Body', displayText: 'Gustoća struje kroz trup [A/m²]' },
       ]
     }
   ];

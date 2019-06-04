@@ -10,9 +10,13 @@ h1 {
   text-align: center;
 }
 
-.row-img {
-  width: 600px;
-  padding-top: 30px;
+.row-select {
+  padding-top: 80px;
+  padding-left: 70px;
+}
+
+.row-imgs {
+  width: 500px;
 }
 
 .images {
@@ -45,10 +49,29 @@ input {
   background-color: lightgrey;
 }
 
+.imageBody {
+  padding-bottom: 70px;
+}
+
+.imageVoltages {
+  width: 300px;
+  height: 180px;
+}
+
+.row-show {
+  padding-top: 30px;
+}
+
+.row-img {
+  padding-top: 30px;
+  width: 570px;
+}
+
 @media screen and (max-width: 800px) {
   .row {
     width: 100%;
     margin: auto;
+    padding-left: 15px;
   }
 
   .images {
@@ -68,5 +91,21 @@ input {
     padding-right: 15px;
     padding-left: 15px;
     padding-bottom: 50px;
+  }
+
+  .row-show {
+    padding: 0px;
+  }
+
+  .row-chart {
+    padding-top: 40px;
+  }
+
+  .imageBody {
+    padding-bottom: 10px;
+  }
+
+  .imageVoltages {
+    padding-right: 50px;
   }
 }

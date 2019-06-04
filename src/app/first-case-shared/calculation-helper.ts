@@ -25,7 +25,7 @@ export function calculationHelper(frequency: number, data: CalculationData): Cal
   return {
     I: I,
     armEnergyDensity,
-    bodyEnergyDensity
+    bodyEnergyDensity,
   };
 }
 
